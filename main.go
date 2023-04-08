@@ -2,13 +2,95 @@ package main
 // import ("time")
 import "fmt"
 
+//interfaces
+type Animal interface {
+	Says() string
+	NumberOfLegs() int
+}
+
+type Dog struct {
+	Name string
+	Breed string
+}
+
+type Gorilla struct {
+	Name string
+	Color string
+	NumberOfTeeth int
+}
+
+func main() {
+	dog := Dog {
+		Name: "Samson",
+		Breed: "German Shepherd",
+	}
+	// gorilla := Gorilla {
+	// 	Name: "Peter",
+	// 	Color: "Black",
+	// 	NumberOfTeeth: 29,
+	// }
+	PrintInfo(&dog)
+}
+
+func PrintInfo(a Animal) {
+	fmt.Println("This animal says", a.Says(), " and has ", a.NumberOfLegs(), " legs")
+}
+
+func (d *Dog) Says() string {
+	return "Woof"
+}
+
+func (d *Dog) NumberOfLegs() int {
+	return 4
+}
+
+//looping
+// func main(){
+// 	var firstLine = "Once upon a time"
+// 	for i, l := range firstLine {
+// 		fmt.Println(i, l)
+// 	}
+// 	// animals := make(map[string]string)
+// 	// animals["dog"] = "Jack"
+// 	// animals["cat"] = "Jill"
+// 	// for animalType, animal := range animals {
+// 	// 	fmt.Println(animalType, animal)
+// 	// }
+// 	// animals := []string{"dog", "horse", "cat", "pig", "antelope"}
+// 	// for _, animal := range animals {
+// 	// 	fmt.Println(animal)
+// 	// }
+// }
+
+//decision struct
+// func main(){
+// 	 myNum := 16
+// 	 if myNum >= 16{
+// 		myNum = myNum + 5
+// 		fmt.Println(myNum)
+// 	 } else {
+// 		fmt.Println("Can't do anything with this")
+// 	 }
+// 	// isCat := "dog"
+// 	// if isCat == "dog"{
+// 	// 	fmt.Println("This is not a cat")
+// 	// } else {
+// 	// 	fmt.Println("This is a cat")
+// 	// }
+// 	// var isTrue bool
+// 	// isTrue = true
+// 	// if isTrue {
+// 	// 	fmt.Println("It is true")
+// 	// }
+// }
+
 //slices
 
-func main(){
-	var mySlice []string
-	mySlice = append(mySlice, "Otonye", "Peace", "Cynthia", "James","Sear")
-	fmt.Println(mySlice[0:2])
-}
+// func main(){
+// 	var mySlice []string
+// 	mySlice = append(mySlice, "Otonye", "Peace", "Cynthia", "James","Sear")
+// 	fmt.Println(mySlice[0:2])
+// }
 
 //map
 
