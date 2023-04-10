@@ -3,9 +3,10 @@ package main
 import "fmt"
 
 func main(){
-	a := 10
-	b := 9
-	sum := a % b
-	fmt.Println(sum)
+	a := []int{90, 10, 50}
+	b := a
+	b[1] = 100
+	fmt.Println(b)
+	fmt.Println(a)
 }
 
