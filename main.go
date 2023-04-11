@@ -1,8 +1,8 @@
 package main
-import "net/http"
-// import ("time")
-import "fmt"
-
+import (
+    "fmt"
+    "net/http"
+)
 
 func main(){
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -12,5 +12,6 @@ func main(){
 		}
 		fmt.Println(fmt.Sprintf("Number of bytes written %d", n))
 	})
+	_ = http.ListenAndServe(":8080", nil)
 }
 
