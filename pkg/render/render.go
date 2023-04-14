@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"path/filepath"
 	"text/template"
+
 	"main.com/mymodule/pkg/config"
 )
 
@@ -20,11 +21,15 @@ func NewTemplates(a *config.AppConfig){
 }
 
 func RenderTemplates(w http.ResponseWriter, html string) {
-	tc := app.TemplateCache
-
+	var tc map[string]*template.Template
+	if app.UseCache {
+		tc = app.TemplateCache
+	} else {
+		tc, _ = CreateTemplateCache()
+	}
 	t, ok := tc[html]
 	if !ok {
-		log.Fatal("Could not get template from template cacje")
+		log.Fatal("Could not get template from template cache")
 	}
 	buf := new(bytes.Buffer)
 	err := t.Execute(buf, nil)

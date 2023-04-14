@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
 	"main.com/mymodule/pkg/config"
 	"main.com/mymodule/pkg/handlers"
 	"main.com/mymodule/pkg/render"
@@ -18,6 +19,7 @@ func main(){
 		log.Fatal("Cannot create template cache")
 	}
 	app.TemplateCache = tc
+	app.UseCache = false
 	repo := handlers.NewRepo(&app)
 	handlers.NewHandlers(repo)
 	render.NewTemplates(&app)
