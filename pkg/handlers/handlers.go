@@ -2,16 +2,32 @@ package handlers
 
 import (
 	"net/http"
-
+	"main.com/mymodule/pkg/config"
 	"main.com/mymodule/pkg/render"
 )
 
+var Repo *Repository
 
-func Home(w http.ResponseWriter, r *http.Request){
+type Repository struct {
+	App *config.AppConfig
+}
+
+func NewRepo(a *config.AppConfig) *Repository {
+	return &Repository{
+		App: a,
+	}
+}
+
+func NewHandlers(r *Repository){
+	Repo = r
+}
+
+
+func (m *Repository) Home(w http.ResponseWriter, r *http.Request){
 	render.RenderTemplates(w, "home.html")
 }
 
-func About(w http.ResponseWriter, r *http.Request){
+func (m *Repository) About(w http.ResponseWriter, r *http.Request){
 	render.RenderTemplates(w, "about.html")
 }
 

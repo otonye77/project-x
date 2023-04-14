@@ -6,19 +6,28 @@ import (
 	"net/http"
 	"path/filepath"
 	"text/template"
+	"main.com/mymodule/pkg/config"
 )
 
+var functions = template.FuncMap {
+
+}
+
+var app *config.AppConfig
+
+func NewTemplates(a *config.AppConfig){
+	app = a
+}
+
 func RenderTemplates(w http.ResponseWriter, html string) {
-	tc, err := CreateTemplateCache()
-	if err != nil {
-		log.Fatal(err)
-	}
+	tc := app.TemplateCache
+
 	t, ok := tc[html]
 	if !ok {
-		log.Fatal(err)
+		log.Fatal("Could not get template from template cacje")
 	}
 	buf := new(bytes.Buffer)
-	err = t.Execute(buf, nil)
+	err := t.Execute(buf, nil)
 	if err != nil {
 		log.Println(err)
 	}
