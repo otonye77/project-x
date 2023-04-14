@@ -8,6 +8,8 @@ import (
 	"text/template"
 
 	"main.com/mymodule/pkg/config"
+	// "main.com/mymodule/pkg/handlers"
+	"main.com/mymodule/pkg/models"
 )
 
 var functions = template.FuncMap {
@@ -20,7 +22,11 @@ func NewTemplates(a *config.AppConfig){
 	app = a
 }
 
-func RenderTemplates(w http.ResponseWriter, html string) {
+func AddDefaultData(td *models.TemplateData) *models.TemplateData{
+	return td
+}
+
+func RenderTemplates(w http.ResponseWriter, html string, td *models.TemplateData) {
 	var tc map[string]*template.Template
 	if app.UseCache {
 		tc = app.TemplateCache
@@ -32,7 +38,7 @@ func RenderTemplates(w http.ResponseWriter, html string) {
 		log.Fatal("Could not get template from template cache")
 	}
 	buf := new(bytes.Buffer)
-	err := t.Execute(buf, nil)
+	err := t.Execute(buf, td)
 	if err != nil {
 		log.Println(err)
 	}
